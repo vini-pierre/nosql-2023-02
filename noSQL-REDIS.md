@@ -10,16 +10,37 @@ https://redis.io/
 - Persistência dos dados não é a prioridade e sim a replicação
 - Tipos de valores: primitivos (string, números, lógicos), listas, conjuntos, hash e conjuntos ordenados
 
-## Instalando
+## Utilizando Docker
 
-6379
+[Docker Playground](https://labs.play-with-docker.com/)
+
+## Preparando o Ambiente
+
+- Criar uma imagem baseada no centOS
+
+`docker pull centos`
+
+- Iniciar um `container`
+
+`docker run -it -p 6379:6379 --name redis centos`
+
+- Atualizar o repositório do `yum`
+
+```
+cd /etc/yum.repos.d/
+sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+dnf update -y
+```
+
+## Instalando Redis no Container
 
 yum install -y redis
 
 ## Executando
 
 ```
-redis-server &
+redis-server --protected-mode no &
 
 redis-cli
 
@@ -32,24 +53,42 @@ ping
 - Parar o servidor: `redis-cli shutdown`
 - Iniciar o servidor
 - `GET msg`
-
-
+  
 ## Comandos
 
 - Criar, recuperar e remover uma chave (encerar o server e observar que a chave pode ser perdida)
 ```
 SET SP;RJ 400Km
 GET SP;RJ
+KEYS *
 DEL SP;RJ
 ```
+- Outras operações
+    - `INCR`: incrementa em uma unidade
+    - `DECR`: decrementa em uma unidade
+    - `INCRBY`: incrementa em X unidades
+    - `DECRBY`: decrementa em X unidades
+    - `APPEND`: concatena uma `String` ao valor (também `String`) de uma chave
+    - `GETRANGE`: obtem uma substring do valor associado a uma chave
+
+- **Exercício**: Quatro equipes de futebol de enfrentam em dois jogos simultâneos. Como controlar o placar dos jogos utilizando *Redis*? Considere também a possibilidade do cancelamento de gols.
 
 ## Listas
+
+- Uma única chave pode ter mais de um valor associado
+- Novos valores são adicionados à direita da lista (item 1 -> item 2 -> item n) com `RPUSH` ou à esquerda com `LPUSH`
+- Valores são removidos da esquerda com o `LPOP`
+- Para listar todos os valores utilizar o `LRANGE`
+- O índice de um valor pode ser obtido por meio do `LINDEX`
+- `LTRIM` remove elementos de uma lista fora de um intervalo definido
 
 ```
 RPUSH SP;RJ 400Km R$700,00
 LRANGE SP;RJ 0 -1
 LINDEX SP;RJ 0
 ```
+- **Exercício**: verificar se a expressão `(10 * 2 + (3 -1)` está correta quanto à quantidade de parêntesis abertos e fechados
+- **Exercício**: construir um sistema de senhas de atendimento em uma agência bancária considerando uma fila normal e também uma prioritária
 
 ## Hash
 
