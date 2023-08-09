@@ -10,12 +10,18 @@ https://redis.io/
 - Persistência dos dados não é a prioridade e sim a replicação
 - Tipos de valores: primitivos (string, números, lógicos), listas, conjuntos, hash e conjuntos ordenados
 
+## Instalando
+
+6379
+
+yum install -y redis
+
 ## Executando
 
 ```
-/bin/redis-server /etc/redis.conf &
+redis-server &
 
-/bin/redis-cli
+redis-cli
 
 ping
 ```
