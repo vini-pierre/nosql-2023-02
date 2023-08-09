@@ -155,6 +155,22 @@ HDEL SP;BH empresa
 
 - **Exercício**: armazenar a quantidade de gols marcados por um jogador em determinado campeonato.
 
+## Coordenadas Geográficas
+
+- É possível armazenar coordenadas geográficas (latitude / longitude)
+- O comando `GEOADD` adiciona uma coordenada
+
+```
+> GEOADD bikes:rentable -122.27652 37.805186 station:1
+> GEOADD bikes:rentable -122.2674626 37.8062344 station:2
+> GEOADD bikes:rentable -122.2469854 37.8104049 station:3
+
+```
+- Pode-se consultar coordenadas com base em um raio de distância:
+```
+GEOSEARCH bikes:rentable FROMLONLAT -122.2612767 37.7936847 BYRADIUS 5 km WITHDIST
+```
+
 ## Replicação com Container
 
 - Criar uma rede Docker: `docker network create local-network`
