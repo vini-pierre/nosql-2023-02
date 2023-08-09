@@ -73,6 +73,15 @@ DEL SP;RJ
 
 - **Exercício**: Quatro equipes de futebol de enfrentam em dois jogos simultâneos. Como controlar o placar dos jogos utilizando *Redis*? Considere também a possibilidade do cancelamento de gols.
 
+## Expirando Chaves
+
+- Pode-se determinar um tempo de "vida" para chaves criadas com o `EXPIRE`
+```
+SET MENSAGEM Oi
+GET MENSAGEM
+EXPIRE MENSAGEM 10
+```
+
 ## Listas
 
 - Uma única chave pode ter mais de um valor associado
