@@ -35,7 +35,7 @@ dnf update -y
 
 ## Instalando Redis no Container
 
-yum install -y redis
+`yum install -y redis`
 
 ## Executando
 
@@ -169,6 +169,12 @@ HDEL SP;BH empresa
 - Pode-se consultar coordenadas com base em um raio de distância:
 ```
 GEOSEARCH bikes:rentable FROMLONLAT -122.2612767 37.7936847 BYRADIUS 5 km WITHDIST
+```
+## Streams
+
+```
+XREAD BLOCK 0 STREAMS eventos $
+XADD eventos * tipo click
 ```
 
 ## Replicação com Container
