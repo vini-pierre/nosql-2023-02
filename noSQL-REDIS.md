@@ -122,16 +122,16 @@ LINDEX SP;RJ 0
 
 - Hashes podem ser vistos como sub-chaves e comparados a registros em um banco de dados relacional ou ainda adocumentos em bancos de dados noSQL
 - Principais operações:
+  - `HMSET`: cria / atualiza chaves (mais de uma)
   - `HGET`: retorna o valor de uma chave
   - `HMGET`: retorna valores de chaves
-  - `HMSET`: cria chaves (mais de uma)
   - `HDEL`: remove uma chave
   - `HLEN`: retorna a quantidade de chaves
   - `HEXISTS`: verifica se uma sub-chave existe
   - `HKEYS`: retorna todas as sub-chaves
   - `HVALS`: retorna todos os valores armazenados nas sub-chaves
-  - `HINCRBY à incrementa uma sub-chave baseado em um valor inteiro
-  - `HINCRBYFLOAT à incrementa uma sub-chave baseado em um valor decimal
+  - `HINCRBY` à incrementa uma sub-chave baseado em um valor inteiro
+  - `HINCRBYFLOAT` à incrementa uma sub-chave baseado em um valor decimal
 
 ```
 HSET SP;BH distancia 600 preco 800.0 empresa TAM
@@ -139,6 +139,21 @@ HGETALL SP;BH
 HGET SP;BH preco
 HDEL SP;BH empresa
 ```
+- **Exercício**: criar uma estrutura para armazenar o nome de um aluno, sua turma e semestre (escolher a chave apropriadamente). Atualizar o semestre atual.
+
+## ZSet
+
+- ZSets se assemelham aos Hashes mas as chaves (membros) são únicas e os valores (scores) devem ser apenas números
+- Itens podem ser acessados de maneira ordenada
+- Principais operações:
+  - `ZREM`: remove membros
+  - `ZCARD`: retorna o número de membros
+  - `ZCOUNT`: retorna a quantidade de membros com o score entre os parâmetros informados
+  - `ZRANK`: retorna a posição do membro
+  - `ZSCORE`: retorna o score de um membro
+  - `ZRANGEBYSCORE`: retorna os membros cujo score estejam entre determinado intervalo
+
+- **Exercício**: armazenar a quantidade de gols marcados por um jogador em determinado campeonato.
 
 ## Replicação com Container
 
