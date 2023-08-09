@@ -104,7 +104,13 @@ LINDEX SP;RJ 0
   - `SRANDMEMBER`: retorna um item aleatório
   - `SISMEMBER`: verifica se um item pertence ao Set
   - `SPOP`: remove itens da esquerda
-  - `SMOVE` move itens de um set para outro
+  - `SMOVE`: move itens de um set para outro
+  - `SDIFF`: retorna os elementos distintos entre conjuntos
+  - `SDIFFSTORE`: mesmo que anterior só que inclui itens no conjunto destino
+  - `SINTER`: retorna elementos em comum entre conjuntos
+  - `SINTERSTORE`: mesmo que anterior só que inclui itens no conjunto destino
+  - `SUNION`: une os dois conjuntos sem repetir itens
+  - `SUNIONSTORE`: mesmo que anterior só que inclui itens no conjunto destino
 
 ## Hash
 
