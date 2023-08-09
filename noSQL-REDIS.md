@@ -81,6 +81,7 @@ DEL SP;RJ
 - Para listar todos os valores utilizar o `LRANGE`
 - O índice de um valor pode ser obtido por meio do `LINDEX`
 - `LTRIM` remove elementos de uma lista fora de um intervalo definido
+- `RPOPLPUSH` remove um elemento da direita de uma lista e adiciona à esquerda em outra
 
 ```
 RPUSH SP;RJ 400Km R$700,00
@@ -89,6 +90,21 @@ LINDEX SP;RJ 0
 ```
 - **Exercício**: verificar se a expressão `(10 * 2 + (3 -1)` está correta quanto à quantidade de parêntesis abertos e fechados
 - **Exercício**: construir um sistema de senhas de atendimento em uma agência bancária considerando uma fila normal e também uma prioritária
+- **Exercício**: controlar uma lista de compras com itens que devem ser comprados no mercado e os que já foram colocados no carrinho
+
+## Conjuntos (Sets)
+
+- Diferem das listas por não permitirem valores duplicados para uma mesma chave
+- Principais comandos
+  - `SADD`:  adiciona / cria um Set incluindo itens
+  - `SMEMBERS`: retorna todos os itens de um Set
+  - `SISMEMBER`: verifica se um item pertence ao Set
+  - `SREM`: remove um item do Set (se existir)
+  - `SCARD`: retorna o número total de itens do Set
+  - `SRANDMEMBER`: retorna um item aleatório
+  - `SISMEMBER`: verifica se um item pertence ao Set
+  - `SPOP`: remove itens da esquerda
+  - `SMOVE` move itens de um set para outro
 
 ## Hash
 
