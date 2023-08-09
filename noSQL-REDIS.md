@@ -102,7 +102,6 @@ LINDEX SP;RJ 0
   - `SREM`: remove um item do Set (se existir)
   - `SCARD`: retorna o número total de itens do Set
   - `SRANDMEMBER`: retorna um item aleatório
-  - `SISMEMBER`: verifica se um item pertence ao Set
   - `SPOP`: remove itens da esquerda
   - `SMOVE`: move itens de um set para outro
   - `SDIFF`: retorna os elementos distintos entre conjuntos
@@ -112,7 +111,31 @@ LINDEX SP;RJ 0
   - `SUNION`: une os dois conjuntos sem repetir itens
   - `SUNIONSTORE`: mesmo que anterior só que inclui itens no conjunto destino
 
+- **Exercício**: criar um controle de ocupação de assentos em um vôo (RDIS888) onde devem fazer parte do conjunto as identificações dos assentos já ocupados:
+  - Antes de reservar um assento verificar se ele já está alocado no vôo
+  - Oferecer a opção de cancelamento da reserva do assento no vôo
+  - Criar um segundo vôo (RDIS999) e reservar alguns assentos
+  - Verificar quais assentos são comuns e distintos entre os dois vôos
+  - Transferir todos os assentos que não são comuns para um terceiro vôo (RDI000)
+
 ## Hash
+
+- Hashes podem ser vistos como sub-chaves e comparados a registros em um banco de dados relacional ou ainda adocumentos em bancos de dados noSQL
+- Principais operações:
+- HGET à retorna o valor de uma chave
+HMGET à retorna valores de chaves
+HMSET à cria chaves (mais de uma)
+HDEL à remove uma chave
+HLEN à retorna a quantidade de chaves
+
+- HEXISTS à verifica se uma sub-chave existe
+HKEYS à retorna todas as sub-chaves
+HVALS à retorna todos os valores
+armazenados nas sub-chaves
+HINCRBY à incrementa uma sub-chave
+baseado em um valor inteiro
+HINCRBYFLOAT à incrementa uma sub-chave
+baseado em um valor decimal
 
 ```
 HSET SP;BH distancia 600 preco 800.0 empresa TAM
