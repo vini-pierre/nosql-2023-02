@@ -122,20 +122,16 @@ LINDEX SP;RJ 0
 
 - Hashes podem ser vistos como sub-chaves e comparados a registros em um banco de dados relacional ou ainda adocumentos em bancos de dados noSQL
 - Principais operações:
-- HGET à retorna o valor de uma chave
-HMGET à retorna valores de chaves
-HMSET à cria chaves (mais de uma)
-HDEL à remove uma chave
-HLEN à retorna a quantidade de chaves
-
-- HEXISTS à verifica se uma sub-chave existe
-HKEYS à retorna todas as sub-chaves
-HVALS à retorna todos os valores
-armazenados nas sub-chaves
-HINCRBY à incrementa uma sub-chave
-baseado em um valor inteiro
-HINCRBYFLOAT à incrementa uma sub-chave
-baseado em um valor decimal
+  - `HGET`: retorna o valor de uma chave
+  - `HMGET`: retorna valores de chaves
+  - `HMSET`: cria chaves (mais de uma)
+  - `HDEL`: remove uma chave
+  - `HLEN`: retorna a quantidade de chaves
+  - `HEXISTS`: verifica se uma sub-chave existe
+  - `HKEYS`: retorna todas as sub-chaves
+  - `HVALS`: retorna todos os valores armazenados nas sub-chaves
+  - `HINCRBY à incrementa uma sub-chave baseado em um valor inteiro
+  - `HINCRBYFLOAT à incrementa uma sub-chave baseado em um valor decimal
 
 ```
 HSET SP;BH distancia 600 preco 800.0 empresa TAM
