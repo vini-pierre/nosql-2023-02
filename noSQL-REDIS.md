@@ -186,6 +186,200 @@ XREAD BLOCK 0 STREAMS eventos $
 XADD eventos * tipo click
 ```
 
+## Redis na Cloud
+
+- Redis pode ser acessado na Cloud [AQUI](https://app.redislabs.com/#/login)
+
+## Use Cases
+
+## Integração Aplicações (Nodejs)
+
+- Criar uma pasta `single-signon`
+- Acessar a pasta `cd single-signon`
+- Iniciar um projeto **Nodejs** `npm init -y`
+- Instalar o cliente **Redis** para **Nodejs** `npm install redis --save`
+
+  ```javascript
+  var redis = require('redis');
+
+  async function testeConexao() {
+
+      const cli = redis.createClient({
+          password: '',
+          socket: {
+              host: '',
+              port: 16633
+          }
+      });
+
+      await cli.connect();
+
+      cli.on("error", function (error) {
+          console.error(error);
+      });
+
+      console.log('conectado', cli.isOpen);
+      var ret = await cli.ping();
+      console.log(ret)
+
+  }
+
+  testeConexao();
+  ```
+## Exemplo Express
+
+- Instalar os pacotes necessários `npm install express ejs cookie-parser --save`
+
+- Exemplo:
+
+  ```javascript
+  var express = require('express')
+  var app = express()
+
+  app.use(express.static('public'))
+
+  app.get("/", (req, res) => {
+      res.status(200).send('Ok');
+  })
+
+  app.listen(8888, () => {
+      console.log('Servidor iniciado porta 8888')
+  });
+  ```
+
+## Autenticação com Single-Signon
+
+- Continuando a aplicação...
+- Criar duas pastas `view` e `public`
+- Criar a página `login.html`` dentro de `public`
+
+    ```html
+    <html>
+
+    <head>
+        <title>Redis - Login</title>
+    </head>
+
+    <body>
+        <form action="/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha">
+            <input type="submit" value="Login">
+        </form>
+    </body>
+
+    </html>
+    ```
+
+  - Incluir a página de login como pública
+
+  ```javascript
+  app.use(express.static('public'))
+  ```
+
+  - Criar os *endpoints*
+
+  ```javascript
+  app.get('/', (req, res) => {
+  })
+  app.post('/login', (req, res) => {
+  })
+  app.post('/perfil', (req, res) => {
+  })
+  app.get('/remove', (req, res) => {
+  })
+  ```
+- Adicionar o tratamento de *cookies*
+  ```javascript
+  var cookieParser = require('cookie-parser')
+  app.use(cookieParser())
+  ```
+- Verificar se já existe o *token* armazenado na forma de *cookie*
+
+  ```javascript
+  app.get('/', (req, res) => {
+  var tokenCookie = req.cookies.tokencookie
+  if (tokenCookie) {
+  cli.hgetall(tokenCookie, (err, data) => {
+  res.render("home", {"corfrente": data.corFrente, "corfundo": data.corFundo});
+  })
+  } else {
+  res.sendFile(__dirname + "/public/login.html");
+  }
+  })
+  ```
+- Habilitando dados enviados via formulário
+  ```javascript
+  app.use(express.urlencoded({ extended: true }))
+  ```
+- Habilitar a geraçao de **tokens**
+  ```javascript
+  var jwt = require('jsonwebtoken')
+  ```
+- Recebendo o *login* e *sennha* do formulário
+  ```javascript
+  app.post('/login', (req, res) => {
+  var username = req.body.username
+  var senha = req.body.senha
+  if (username == 'teste' && senha == 'teste') {
+  var token = jwt.sign({ username }, 'minhachavesecreta')
+  cli.hset([token, "corFrente", "#", "corFundo", "#"], (err, res) => {
+  })
+  res.cookie('tokencookie',token)
+  res.sendFile(__dirname + "/public/perfil.html");
+  } else {
+  res.sendFile(__dirname + "/public/login.html");
+  }
+  })
+  ```
+- Criar a página perfil.html dentro de `public`
+  ```html
+  <html>
+
+  <head>
+      <title>Redis - Perfil</title>
+  </head>
+  
+  <body style="font-family: Arial, Helvetica, sans-serif;">
+
+      <form action="/perfil" method="POST">
+          <label for="corfrente">Cor Frente:</label>
+          <select id="corfrente" name="corfrente">
+              <option value="#FF0000">Vermelho</option>
+              <option value="#00FF00">Verde</option>
+          </select>
+          <label for="corfundo">Cor Fundo:</label>
+          <select id="corfundo" name="corfundo">
+              <option value="#00FF00">Verde</option>
+              <option value="#FF0000">Vermelho</option>
+          </select>
+          <input type="submit" value="Selecionar">
+      </form>
+  </body>
+
+  </html>
+  ```
+- Habilitar o **ejs**
+  ```javascript
+  app.set('view engine', 'ejs')
+  ```
+- Criar a página `home.ejs` dentro de `views`
+
+  ```html
+  <html>
+
+  <head>
+      <title>Redis - Home</title>
+  </head>
+
+  <body style="background-color:<%= corfundo %>" text="<%= corfrente %>">
+      <h1>Bem vindo!</h1>
+  </body>
+
+  </html>
+  ```
 ## Replicação com Container
 
 - Criar uma rede Docker: `docker network create local-network`
