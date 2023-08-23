@@ -296,6 +296,7 @@ XADD eventos * tipo click
   app.post('/perfil', (req, res) => {
   })
   app.get('/remove', (req, res) => {
+    res.clearCookie("tokencookie");
   })
   ```
 - Adicionar o tratamento de *cookies*
