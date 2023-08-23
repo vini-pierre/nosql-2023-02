@@ -418,6 +418,20 @@ start();
 
   </html>
   ```
+## Arquivo de Configuração
+
+- **Redis** pode ser iniciado com configurações específicas `redis-server redis.conf`
+
+## Configurando Persistência
+
+- Criar um arquivo `redis.conf`
+- Informar o parâmetro `dir` para apontar para o diretório de *snapshot*
+- Informar o parâmetro `dbfilename` para o nome do arquivo de *snapshot*
+- Configurar o *snapshot* com `save 60 10`
+- Pode-se forçar o *snapshot* com o comando `save`
+- Outra forma é utilizando o AOF (Append Only File)
+- Basta definir o parâmetro `appendonly yes` e definir a periodicidade com `appendfsync` que pode ser: `aways`, `everysec` ou `no`
+
 ## Replicação com Container
 
 - Criar uma rede Docker: `docker network create local-network`
