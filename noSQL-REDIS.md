@@ -251,7 +251,7 @@ XADD eventos * tipo click
 
 - Continuando a aplicação...
 - Criar duas pastas `view` e `public`
-- Criar a página `login.html`` dentro de `public`
+- Criar a página `login.html` dentro de `public`
 
     ```html
     <html>
