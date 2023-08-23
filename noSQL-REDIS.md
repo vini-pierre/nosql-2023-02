@@ -300,6 +300,35 @@ XADD eventos * tipo click
     res.status(200).send('Cookie removido');
   })
   ```
+- Criar a conexão com o **Redis** na *Cloud*
+  ```javascript
+
+  var redis = require('redis');
+
+  const cli = redis.createClient({
+    password: '',
+    socket: {
+        host: '',
+        port: 16356
+    }
+  });
+
+  async function start() {
+
+    console.log('Teste conexao redis x nodejs')
+    console.log('Criar o client')
+    console.log('Estabelecer conexao')
+    await cli.connect()
+    const resultado = await cli.ping()
+    console.log(resultado)
+
+    app.listen(8888, () => {
+        console.log('Servidor iniciado porta 8888')
+    });
+}
+
+start();
+```
 - Adicionar o tratamento de *cookies*
   ```javascript
   var cookieParser = require('cookie-parser')
