@@ -255,24 +255,31 @@ XADD eventos * tipo click
 
     ```html
     <html>
-
+    
     <head>
         <title>Redis - Login</title>
     </head>
-
-    <body>
-        <form action="/login" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha">
-            <input type="submit" value="Login">
-        </form>
+    
+    <body style="font-family: Arial, Helvetica, sans-serif;">
+    
+        <div
+            style="display: flex;border: solid; flex-direction: column; height: 100%; align-items: center; justify-content: center;">
+            <div>
+    
+                <form action="/login" method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha">
+                    <input type="submit" value="Login">
+                </form>
+    
+            </div>
+        </div>
     </body>
-
+    
     </html>
     ```
-
   - Incluir a página de login como pública
 
   ```javascript
